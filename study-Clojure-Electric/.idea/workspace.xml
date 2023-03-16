@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="88e781e1-f688-4ff1-845f-74c5475cef41" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../.idea/ClojureProjectResolveSettings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="CLJC Namespace" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2MgHp9LCExyGYVWRJoY9SOekmDj" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cursive.last.file.extension./Users/bariscanates/prj/electric/study-Clojure-Electric/src&quot;: &quot;cljc&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;
+  }
+}</component>
+  <component name="ReplState" timestamp="1678877383128">{:repl-history {:ide [], :local [{:command &quot;(user/main\n  )&quot;, :offset 13, :ns &quot;user&quot;} {:command &quot;(e/defn TableApp []\n        (e/client\n\n          (let [!map (atom {:username \&quot;\&quot; :email \&quot;\&quot;}) !in (atom \&quot;\&quot;), in (e/watch !in) !button1 (atom \&quot;\&quot;) !button2 (atom \&quot;\&quot;) !userName (atom \&quot;\&quot;) !email (atom \&quot;\&quot;) !bg-color (atom \&quot;inherit\&quot;) !bg-color2 (atom \&quot;inherit\&quot;) !placeholder (atom \&quot;Please write your username...\&quot;)]\n            (dom/input (dom/props {:id 1 :placeholder (e/watch !placeholder) :style {:background-color (e/watch !bg-color)}})\n                       (dom/on \&quot;keydown\&quot; (e/fn [enter]\n                                               (when (= \&quot;Enter\&quot; (.-key enter))\n                                                 (when-some [givenValue (contrib.str/empty-&gt;nil (-&gt; enter .-target .-value))]\n                                                   (assoc !map :username givenValue)\n                                                   (set! (.-value dom/node)\n                                                         )))))\n                       (dom/on \&quot;keyup\&quot; (e/fn [keyup]\n                                             (when-some [givenValue (contrib.str/empty-&gt;nil (-&gt; keyup .-target .-value))]\n                                               (reset! !button1 givenValue)\n                                               )))\n                       )\n\n            (dom/input (dom/props {:placeholder (e/watch !placeholder) :style {:background-color (e/watch !bg-color2)}})\n                       (dom/on \&quot;keydown\&quot; (e/fn [enter]\n                                               (when (= \&quot;Enter\&quot; (.-key enter))\n                                                 (when-some [givenValue (contrib.str/empty-&gt;nil (-&gt; enter .-target .-value))]\n                                                   (reset! (!map :email) givenValue)\n                                                   (set! (.-value dom/node)\n                                                         )))))\n                       (dom/on \&quot;keyup\&quot; (e/fn [keyup]\n                                             (when-some [givenValue (contrib.str/empty-&gt;nil (-&gt; keyup .-target .-value))]\n                                               (reset! !button2 givenValue)\n                                               )))\n                       )\n            (ui/button (e/fn [] ((reset! !userName (e/watch !button1)) (reset! !email (e/watch !button2)) (reset! !bg-color2 \&quot;red\&quot;) (reset! !bg-color \&quot;red\&quot;) (reset! !placeholder \&quot;\&quot;)))\n                       (dom/text \&quot;Submit!!!\&quot;)\n                       (dom/props {:class \&quot;Button\&quot; :style {:color \&quot;white\&quot; :background-color \&quot;black\&quot;}}))\n\n            (dom/table (dom/props {:class \&quot;hyperfiddle\&quot;})\n                       (e/client\n                         (dom/tr\n                           (dom/th (dom/text (str \&quot;Username\&quot;)))\n                           (dom/th (dom/text (str \&quot;Email\&quot;)))\n                           )\n                         (dom/tr\n                           (dom/td (dom/text (e/watch (!map :username))))\n                           (dom/td (dom/text (e/watch (!map :email))))\n                           )\n                         )\n                       )\n            )\n          )\n        )&quot;, :offset 3084, :ns &quot;app.P02-PushInfoToTable&quot;} {:command &quot;assoc !map :username&quot;, :offset 20, :ns &quot;app.P02-PushInfoToTable&quot;} {:command &quot;!map :username&quot;, :offset 14, :ns &quot;app.P02-PushInfoToTable&quot;} {:command &quot;(user/m)&quot;, :offset 8, :ns &quot;user&quot;} {:command &quot;(men-bmi 1 20 30)&quot;, :offset 17, :ns &quot;app.P03-BmiCalculator&quot;} {:command &quot;@!state&quot;, :offset 7, :ns &quot;user&quot;} {:command &quot;(user/main)&quot;, :offset 10, :ns &quot;user&quot;}], :remote [{:command &quot;(shadow/repl :dev)&quot;, :offset 17, :ns &quot;shadow.user&quot;} {:command &quot;(e/defn App []\n        (let [!state (atom {:in \&quot;\&quot; :in2 \&quot;\&quot; :in3 \&quot;\&quot; :w \&quot;\&quot; :h \&quot;\&quot; :s \&quot;\&quot; :button1 \&quot;\&quot; :button2 \&quot;\&quot; :button3 \&quot;\&quot; :bg-color \&quot;black\&quot; :bg-color2 \&quot;black\&quot; :bg-color3 \&quot;black\&quot; :placeholder \&quot;...\&quot;})]\n            (let [in (get (e/watch !state) :in) in2 (get (e/watch !state) :in2) in3 (get (e/watch !state) :in3)]\n              (e/client\n                (dom/h1 (dom/text \&quot;BMI Index Calculator\&quot;))\n\n                (dom/dl\n                  (dom/dt (dom/text \&quot;Gender\&quot;))\n                  (dom/dd\n                    (ui/input in (e/fn [v] (swap! !state assoc :in v))\n                              (dom/props {:id 1 :placeholder (get (e/watch !state) :placeholder) :style {:background-color (get (e/watch !state) :bg-color)}})\n                              (dom/on \&quot;keydown\&quot; (e/fn [enter]\n                                                      (when (= \&quot;Enter\&quot; (.-key enter))\n                                                        (when-some [givenValue (contrib.str/empty-&gt;nil (-&gt; enter .-target .-value))]\n                                                          (swap! !state assoc :s givenValue)\n                                                          (set! (.-value dom/node)\n                                                                )))))\n                              (dom/on \&quot;keyup\&quot; (e/fn [keyup]\n                                                    (when-some [givenValue (contrib.str/empty-&gt;nil (-&gt; keyup .-target .-value))]\n                                                      (swap! !state assoc :button1 givenValue)\n                                                      )))\n                              ))\n                  (dom/dt (dom/text \&quot;Weight (cm)\&quot;))\n                  (dom/dd\n                    (ui/input in2 (e/fn [v] (swap! !state assoc :in2 v))\n                              (dom/props {:placeholder (get (e/watch !state) :placeholder) :style {:background-color (get (e/watch !state) :bg-color2)}})\n                              (dom/on \&quot;keydown\&quot; (e/fn [enter]\n                                                      (when (= \&quot;Enter\&quot; (.-key enter))\n                                                        (when-some [givenValue (contrib.str/empty-&gt;nil (-&gt; enter .-target .-value))]\n                                                          (swap! !state assoc :w givenValue)\n                                                          (set! (.-value dom/node)\n                                                                )))))\n                              (dom/on \&quot;keyup\&quot; (e/fn [keyup]\n                                                    (when-some [givenValue (contrib.str/empty-&gt;nil (-&gt; keyup .-target .-value))]\n                                                      (swap! !state assoc :button2 givenValue)\n                                                      )))\n                              ))\n                  (dom/dt (dom/text \&quot;Hight (cm)\&quot;))\n                  (dom/dd\n                    (ui/input in3 (e/fn [v] (swap! !state assoc :in3 v))\n                              (dom/props {:placeholder (get (e/watch !state) :placeholder) :style {:background-color (get (e/watch !state) :bg-color3)}})\n                              (dom/on \&quot;keydown\&quot; (e/fn [enter]\n                                                      (when (= \&quot;Enter\&quot; (.-key enter))\n                                                        (when-some [givenValue (contrib.str/empty-&gt;nil (-&gt; enter .-target .-value))]\n                                                          (swap! !state assoc :h givenValue)\n                                                          (set! (.-value dom/node)\n                                                                )))))\n                              (dom/on \&quot;keyup\&quot; (e/fn [keyup]\n                                                    (when-some [givenValue (contrib.str/empty-&gt;nil (-&gt; keyup .-target .-value))]\n                                                      (swap! !state assoc :button3 givenValue)\n                                                      )))\n                              ))\n                  )\n                (ui/button\n                  (e/fn [] ((swap! !state assoc :s (get (e/watch !state) :button1))\n                            (swap! !state assoc :w (get (e/watch !state) :button2))\n                            (swap! !state assoc :h (get (e/watch !state) :button3))\n                            (swap! !state assoc :bg-color3 \&quot;inherit\&quot;)\n                            (swap! !state assoc :bg-color2 \&quot;inherit\&quot;)\n                            (swap! !state assoc :bg-color \&quot;inherit\&quot;)\n                            (swap! !state assoc :in \&quot;\&quot;)\n                            (swap! !state assoc :in2 \&quot;\&quot;)\n                            (swap! !state assoc :in3 \&quot;\&quot;)))\n                  (dom/text \&quot;Calculate!!!\&quot;)\n                  (dom/props {:class \&quot;Button\&quot; :style {:color \&quot;white\&quot; :background-color \&quot;black\&quot;}}))\n                (dom/h3 (dom/text \&quot;Result is: \&quot; (men-bmi (read-string (get (e/watch !state) :button1)) (read-string (get (e/watch !state) :button2)) (read-string (get (e/watch !state) :button3)))))\n                ))))&quot;, :offset 5078, :ns &quot;app.P03-BmiCalculator&quot;} {:command &quot;(men-bmi (read-string (get (e/watch !state) :button1)) (read-string (get (e/watch !state) :button2)) (read-string (get (e/watch !state) :button3))\n         &quot;, :offset 156, :ns &quot;cljs.user&quot;}]}}</component>
+  <component name="RunManager" selected="Clojure REPL.Lrepl">
+    <configuration default="true" type="Babashka" factoryName="BabashkaLocalRepl" activateToolWindowBeforeRun="false">
+      <setting name="displayName" value="" />
+      <setting name="bbPath" value="" />
+      <setting name="parameters" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <setting name="workingDir" value="" />
+      <setting name="focusEditor" value="false" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Lrepl" type="ClojureREPL" factoryName="Local" activateToolWindowBeforeRun="false">
+      <module name="study-Clojure-Electric" />
+      <setting name="displayName" value="Lrepl" />
+      <setting name="replType" value="NREPL" />
+      <setting name="execution" value="DEPS" />
+      <setting name="jvmArgs" value="" />
+      <setting name="parameters" value="" />
+      <setting name="workingDir" value="$PROJECT_DIR$" />
+      <setting name="profiles" value="" />
+      <setting name="aliases" value="dev" />
+      <setting name="fixLineNumbers" value="false" />
+      <setting name="focusEditor" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Rrepl" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <module name="study-Clojure-Electric" />
+      <setting name="displayName" value="Rrepl" />
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="NREPL" />
+      <setting name="configType" value="PORT_FILE" />
+      <setting name="replPortFileType" value="SPECIFY" />
+      <setting name="customPortFile" value=".shadow-cljs/nrepl.port" />
+      <setting name="fixLineNumbers" value="false" />
+      <setting name="focusEditor" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Local" activateToolWindowBeforeRun="false">
+      <setting name="displayName" value="" />
+      <setting name="replType" value="NREPL" />
+      <setting name="execution" value="LEININGEN" />
+      <setting name="jvmArgs" value="" />
+      <setting name="parameters" value="" />
+      <setting name="workingDir" value="" />
+      <setting name="profiles" value="" />
+      <setting name="aliases" value="" />
+      <setting name="fixLineNumbers" value="false" />
+      <setting name="focusEditor" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="displayName" value="" />
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="replPortFileType" value="STANDARD" />
+      <setting name="customPortFile" value="" />
+      <setting name="fixLineNumbers" value="false" />
+      <setting name="focusEditor" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="study-Clojure-Electric" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="study-Clojure-Electric" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Clojure REPL.Lrepl" />
+      <item itemvalue="Clojure REPL.Rrepl" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="88e781e1-f688-4ff1-845f-74c5475cef41" name="Changes" comment="" />
+      <created>1678182485445</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1678182485445</updated>
+      <workItem from="1678182486719" duration="60925000" />
+      <workItem from="1678436907472" duration="37239000" />
+      <workItem from="1678863830613" duration="9319000" />
+      <workItem from="1678877743560" duration="11000" />
+      <workItem from="1678878163346" duration="37000" />
+      <workItem from="1678883723854" duration="26000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

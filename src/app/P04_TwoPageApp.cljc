@@ -6,7 +6,7 @@
 (e/defn TwoPageApp []
         (e/client
           (let [!state (atom {:url (-> js/window .-location .-pathname) :window "" })]
-            ;change :window key to "_blank" if you want open in new window
+            ;change :window keys value to "_blank" if you want open in new window
             (let [url (get (e/watch !state) :url) window (get (e/watch !state) :window)]
               (case url
                 "/" (do (dom/h1 (dom/text "MAIN PAGE"))

@@ -4,6 +4,7 @@
     app.P03-BmiCalculator
     app.P04-TwoPageApp
     app.P02-PushInfoToTable
+    app.P05-SliderApp
     app.todo-list
     hyperfiddle.electric
     hyperfiddle.electric-dom2))
@@ -11,7 +12,7 @@
 (def electric-main
   (hyperfiddle.electric/boot ; Electric macroexpansion - Clojure to signals compiler
     (binding [hyperfiddle.electric-dom2/node js/document.body]
-      (app.P04-TwoPageApp/TwoPageApp.))))
+      (app.P05-SliderApp/SliderApp.))))
 
 (defonce reactor nil)
 
