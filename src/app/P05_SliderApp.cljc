@@ -20,7 +20,6 @@
                        (ui4/range v (e/fn [newv] ((swap! !state assoc :v newv)))
                                   (dom/props {:min 0, :max 100, :style {:grid-row 2}}))
 
-
                        (ui4/input in (e/fn [v] (swap! !state assoc :in v))
                                   (dom/props {:placeholder (get (e/watch !state) :placeholder)
                                               :style       {:background-color (get (e/watch !state) :bg-color2)
@@ -29,15 +28,16 @@
                                                           (when (= "Enter" (.-key enter))
                                                             (when-some [givenValue (contrib.str/empty->nil (-> enter .-target .-value))]
                                                               (swap! !state assoc :v givenValue)
-                                                              (set! (.-value dom/node)
-                                                                    )))))
+                                                              (set! (.-value dom/node))
+                                                              (swap! !state assoc :in "")))))
                                   (dom/on "keyup" (e/fn [keyup]
                                                         (when-some [givenValue (contrib.str/empty->nil (-> keyup .-target .-value))]
                                                           (swap! !state assoc :v-state givenValue)
                                                           )))
                                   )
 
-                       (dom/button (dom/on "click" (e/fn [click] (swap! !state assoc :v (get (e/watch !state) :v-state))))
+                       (dom/button (dom/on "click" (e/fn [click] (swap! !state assoc :v (get (e/watch !state) :v-state))
+                                                         (swap! !state assoc :in "")))
                                    (dom/text "Insert Num!!!")
                                    (dom/props {:style {:grid-row 4 :width "15em" :height "2em"
                                                        :grid-gap "10em" :align-items :auto
