@@ -6,13 +6,18 @@
     app.P02-PushInfoToTable
     app.P05-SliderApp
     app.todo-list
+    app.P07-PushMultipleInfoToTable
+    app.P06-TableAppByUsingVectorAndFor
+    app.P06b-TableAppByUsingMapAndFor
+    app.P07b-PushMultipleInfoToTableByUsingMap
+    app.P07c-MapExample
     hyperfiddle.electric
     hyperfiddle.electric-dom2))
 
 (def electric-main
   (hyperfiddle.electric/boot ; Electric macroexpansion - Clojure to signals compiler
     (binding [hyperfiddle.electric-dom2/node js/document.body]
-      (app.P05-SliderApp/SliderApp.))))
+      (app.P07b-PushMultipleInfoToTableByUsingMap/TableAppMultiByMap.))))
 
 (defonce reactor nil)
 

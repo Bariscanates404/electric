@@ -1,14 +1,19 @@
-(ns app.P02-PushInfoToTable
+(ns app.P07b-PushMultipleInfoToTableByUsingMap
   (:require [hyperfiddle.electric :as e]
             [hyperfiddle.electric-dom2 :as dom]
             [hyperfiddle.electric-ui4 :as ui]
             ))
 
 
-(e/defn TableApp []
+
+(e/defn TableAppMultiByMap []
         (e/client
-          (let [!state (atom {:in "" :in2 "" :username "" :email "" :button1 "" :button2 "" :bg-color "black" :bg-color2 "black" :placeholder "Please write your username..."})]
-            (let [in (get (e/watch !state) :in) in2 (get (e/watch !state) :in2)]
+          (let [!db-map (atom {}) !table-id (atom 1) !state (atom {:in "" :in2 "" :username "" :email "" :button1 "" :button2 "" :bg-color "black" :bg-color2 "black" :placeholder "Please write your username..."})]
+            (let [in (get (e/watch !state) :in) in2 (get (e/watch !state) :in2) table-id (e/watch !table-id)]
+
+              (defn table-id-counter [last-table-id] (swap! !table-id inc last-table-id))
+              (defn add-item-in-db-map [table-id username password] (swap! !db-map assoc-in [:person/id table-id] {:person/id table-id :person/name username :person/surname password} ))
+
               (ui/input in (e/fn [v] (swap! !state assoc :in v))
                         (dom/props {:id 1 :placeholder (get (e/watch !state) :placeholder) :style {:background-color (get (e/watch !state) :bg-color)}})
                         (dom/on "keydown" (e/fn [enter]
@@ -40,8 +45,8 @@
                         )
 
               (ui/button
-                (e/fn [] ((swap! !state assoc :username (get (e/watch !state) :button1))
-                          (swap! !state assoc :email (get (e/watch !state) :button2))
+                (e/fn [] ((table-id-counter table-id)
+                          (add-item-in-db-map table-id (get (e/watch !state) :button1) (get (e/watch !state) :button2))
                           (swap! !state assoc :bg-color2 "inherit")
                           (swap! !state assoc :bg-color "inherit")
                           (swap! !state assoc :in "")
@@ -52,13 +57,17 @@
               (dom/table
                 (dom/props {:class "hyperfiddle"})
                 (e/client
-                  (dom/tr
-                    (dom/th (dom/text (str "Username")))
-                    (dom/th (dom/text (str "Email")))
-                    )
-                  (dom/tr
-                    (dom/td (dom/text (get (e/watch !state) :username)))
-                    (dom/td (dom/text (get (e/watch !state) :email)))
+                  (dom/table
+                    (dom/tr
+                      (dom/th (dom/text "Id"))
+                      (dom/th (dom/text "Name"))
+                      (dom/th (dom/text "Surname")))
+                    (e/for [{:keys [username email]} (e/watch !db-map)]
+                           (dom/tr
+                             (dom/td (dom/text table-id))
+                             (dom/td (dom/text table-id))
+                             (dom/td (dom/text (e/watch !db-map))))
+                           )
                     )
                   )
                 )
@@ -66,7 +75,7 @@
             )
           )
         )
-;(.-value dom/node) bize input olarak girdiğimiz değer neyse onu dönüyor.
-; --> enter sorununu çöz
-; --> birden fazla değer girilmesi işlemini yap
+
+
+
 

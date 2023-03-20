@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="88e781e1-f688-4ff1-845f-74c5475cef41" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/ClojureProjectResolveSettings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/app/P06_TableAppByUsingVectorAndFor.cljc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/app/P06b_TableAppByUsingMapAndFor.cljc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/P05_SliderApp.cljc" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/P05_SliderApp.cljc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/user.cljs" beforeDir="false" afterPath="$PROJECT_DIR$/../src/user.cljs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,6 +141,7 @@
       <workItem from="1678877743560" duration="11000" />
       <workItem from="1678878163346" duration="37000" />
       <workItem from="1678883723854" duration="26000" />
+      <workItem from="1679227991761" duration="26000" />
     </task>
     <servers />
   </component>

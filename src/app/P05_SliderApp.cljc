@@ -4,7 +4,6 @@
             [hyperfiddle.electric-ui4 :as ui4]))
 
 
-
 (e/defn SliderApp []
         (e/client
           (let [!state (atom {:in "" :v 0 :v-state 0 :placeholder "Write a number please..."})]

@@ -1,14 +1,16 @@
-(ns app.P02-PushInfoToTable
+(ns app.P07-PushMultipleInfoToTable
   (:require [hyperfiddle.electric :as e]
             [hyperfiddle.electric-dom2 :as dom]
             [hyperfiddle.electric-ui4 :as ui]
             ))
 
-
-(e/defn TableApp []
+(e/defn TableAppMulti []
         (e/client
-          (let [!state (atom {:in "" :in2 "" :username "" :email "" :button1 "" :button2 "" :bg-color "black" :bg-color2 "black" :placeholder "Please write your username..."})]
+          (let [!db-vector (atom []) !state (atom {:in "" :in2 "" :username "" :email "" :button1 "" :button2 "" :bg-color "black" :bg-color2 "black" :placeholder "Please write your username..."})]
             (let [in (get (e/watch !state) :in) in2 (get (e/watch !state) :in2)]
+              (defn add-item-in-db-vector [username password]
+                (swap! !db-vector conj {:username username :email password}))
+
               (ui/input in (e/fn [v] (swap! !state assoc :in v))
                         (dom/props {:id 1 :placeholder (get (e/watch !state) :placeholder) :style {:background-color (get (e/watch !state) :bg-color)}})
                         (dom/on "keydown" (e/fn [enter]
@@ -40,8 +42,7 @@
                         )
 
               (ui/button
-                (e/fn [] ((swap! !state assoc :username (get (e/watch !state) :button1))
-                          (swap! !state assoc :email (get (e/watch !state) :button2))
+                (e/fn [] ((add-item-in-db-vector (get (e/watch !state) :button1) (get (e/watch !state) :button2))
                           (swap! !state assoc :bg-color2 "inherit")
                           (swap! !state assoc :bg-color "inherit")
                           (swap! !state assoc :in "")
@@ -52,13 +53,15 @@
               (dom/table
                 (dom/props {:class "hyperfiddle"})
                 (e/client
-                  (dom/tr
-                    (dom/th (dom/text (str "Username")))
-                    (dom/th (dom/text (str "Email")))
-                    )
-                  (dom/tr
-                    (dom/td (dom/text (get (e/watch !state) :username)))
-                    (dom/td (dom/text (get (e/watch !state) :email)))
+                  (dom/table
+                    (dom/tr
+                      (dom/th (dom/text "Username"))
+                      (dom/th (dom/text "Email")))
+                    (e/for [{:keys [username email]} (e/watch !db-vector)]
+                           (dom/tr
+                             (dom/td (dom/text username))
+                             (dom/td (dom/text email)))
+                           )
                     )
                   )
                 )
@@ -66,7 +69,3 @@
             )
           )
         )
-;(.-value dom/node) bize input olarak girdiğimiz değer neyse onu dönüyor.
-; --> enter sorununu çöz
-; --> birden fazla değer girilmesi işlemini yap
-
