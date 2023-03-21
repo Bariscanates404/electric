@@ -55,11 +55,17 @@
                                   :style       {:background-color (get (e/watch !state) :bg-color2)}})
                       (dom/on "keydown" (e/fn [enter]
                                               (when (= "Enter" (.-key enter))
-                                                (when-some [givenValue (contrib.str/empty->nil (-> enter .-target .-value))]
+                                                (when-some [givenValue (contrib.str/empty->nil (->
+                                                                                                 enter
+                                                                                                 .-target
+                                                                                                 .-value))]
                                                   (swap! !state assoc :email givenValue :in2 "")
                                                   ))))
                       (dom/on "keyup" (e/fn [keyup]
-                                            (when-some [givenValue (contrib.str/empty->nil (-> keyup .-target .-value))]
+                                            (when-some [givenValue (contrib.str/empty->nil (->
+                                                                                             keyup
+                                                                                             .-target
+                                                                                             .-value))]
                                               (swap! !state assoc :button2 givenValue)
                                               )))
                       )
