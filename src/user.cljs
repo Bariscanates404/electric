@@ -17,7 +17,7 @@
 (def electric-main
   (hyperfiddle.electric/boot ; Electric macroexpansion - Clojure to signals compiler
     (binding [hyperfiddle.electric-dom2/node js/document.body]
-      (app.P07b-PushMultipleInfoToTableByUsingMap/TableAppMultiByMap.))))
+      (app.P03-BmiCalculator/App.))))
 
 (defonce reactor nil)
 

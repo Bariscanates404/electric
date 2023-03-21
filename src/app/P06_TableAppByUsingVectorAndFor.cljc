@@ -11,7 +11,6 @@
 
 (e/defn VectorTable []
         (e/client
-
           (dom/table
             (dom/tr
               (dom/th (dom/text "Name"))
