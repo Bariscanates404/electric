@@ -10,14 +10,15 @@
     app.P06-TableAppByUsingVectorAndFor
     app.P06b-TableAppByUsingMapAndFor
     app.P07b-PushMultipleInfoToTableByUsingMap
-    app.P07c-MapExample
+    app.P08a-SearchFunction
+    app.P09_SearchFunction
     hyperfiddle.electric
     hyperfiddle.electric-dom2))
 
 (def electric-main
   (hyperfiddle.electric/boot ; Electric macroexpansion - Clojure to signals compiler
     (binding [hyperfiddle.electric-dom2/node js/document.body]
-      (app.P03-BmiCalculator/App.))))
+      (app.P09_SearchFunction/App.))))
 
 (defonce reactor nil)
 
