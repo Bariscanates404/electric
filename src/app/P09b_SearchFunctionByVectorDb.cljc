@@ -1,4 +1,4 @@
-(ns app.P09-SearchFunction
+(ns app.P09b-SearchFunctionByVectorDb
   (:require [hyperfiddle.electric :as e]
             [hyperfiddle.electric-dom2 :as dom]
             [hyperfiddle.electric-ui4 :as ui]
@@ -12,16 +12,19 @@
        (filter (fn [[k v]] (str/includes? (str/lower-case (str k)) (str/lower-case (str ?s)))))
        (into {})))
 
-(defn add-item-in-db-map [username password map]
-  (swap! map assoc {username password})
+(defn add-item-in-db-vector [username password map]
+  (swap! map conj {username password})
   )
+
+
 
 
 (e/defn App []
         (e/client
           ;--------------------------------------STATEMENTS----------------------------------------
           (dom/h1 (dom/text "MAIN PAGE"))
-          (let [!db-map (atom {})
+
+          (let [!db-vector (atom [])
                 !state (atom {
                               :in          ""
                               :in2         ""
@@ -36,7 +39,7 @@
                 in2 (get (e/watch !state) :in2)
                 !search (atom "")
                 search (e/watch !search)
-                filteredMap (filter-db search (e/watch !db-map))]
+                filteredMap (filter-db search (e/watch !db-vector))]
 
             ;----------------------------------HTML/DOM ELEMENTS----------------------------------
             (ui/input in
@@ -83,10 +86,10 @@
                       )
 
             (ui/button
-              (e/fn [] ((add-item-in-db-map
+              (e/fn [] ((add-item-in-db-vector
                           (keyword (get (e/watch !state) :button1))
                           (get (e/watch !state) :button2)
-                          !db-map)
+                          !db-vector)
                         (swap! !state assoc
                                :bg-color2 "inherit"
                                :bg-color "inherit"
@@ -107,7 +110,7 @@
                 (dom/tr
                   (dom/th (dom/text "Name"))
                   (dom/th (dom/text "Surname")))
-                (e/for-by first [[k v] (e/watch !db-map)]
+                (e/for-by first [[k v] (e/watch !db-vector)]
                           (dom/tr
                             (dom/td (dom/text k))
                             (dom/td (dom/props {:style {:white-space :nowrap}}) (dom/text v))
@@ -119,7 +122,9 @@
 
             ;----------------------------SEARCH TAB AND SEARCH TABLE----------------------------------
             (dom/h3 (dom/text "Search Tab"))
-            (dom/h3 (dom/text (e/watch !db-map)))
+            (dom/h3 (dom/text (e/watch !db-vector)))
+            (dom/h3 (dom/text filteredMap))
+
             (e/client                                       ;input elementine girilen degeri alır ve !search atomuna atama yapar.
               (ui/input search (e/fn [v] (reset! !search v))
                         (dom/props {:type "search"}))
@@ -142,4 +147,5 @@
             )
           )
         )
+
 

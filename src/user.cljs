@@ -11,14 +11,16 @@
     app.P06b-TableAppByUsingMapAndFor
     app.P07b-PushMultipleInfoToTableByUsingMap
     app.P08a-SearchFunction
-    app.P09_SearchFunction
+    app.P09-SearchFunction
+    app.P09b-SearchFunctionByVectorDb
+
     hyperfiddle.electric
     hyperfiddle.electric-dom2))
 
 (def electric-main
   (hyperfiddle.electric/boot ; Electric macroexpansion - Clojure to signals compiler
     (binding [hyperfiddle.electric-dom2/node js/document.body]
-      (app.P09_SearchFunction/App.))))
+      (app.P09b-SearchFunctionByVectorDb/App.))))
 
 (defonce reactor nil)
 
