@@ -33,6 +33,8 @@
 (def map2 {:foo 1 :bar {:baz 3}})
 (def map3 {:foo 1 :bar {:baz 3 :dax {:can 9}}})
 
+(into [] map1)
+
 (seq map1) ; ==> => ([:foo 1] [:bar 2] [:baz 3])
 (seq map2) ; ==> => ([:foo 1] [:bar {:baz 3}])
 (seq map3) ; ==> => ([:foo 1] [:bar {:baz 3, :dax {:can 9}}])
