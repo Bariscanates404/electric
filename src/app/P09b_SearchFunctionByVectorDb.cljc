@@ -6,25 +6,21 @@
             ))
 
 ;---------------------------------------DEFN FUNCTIONS-----------------------------------
-(defn filter-db [?s db]                                     ;Burada filter functionunda bulunan k v sembollerinden k ile ararsak key v ile ararsak
-  ;value den arayabiliriz.
+(defn filter-db [?s db]
   (->> db
        (filter (fn [[k v]] (str/includes? (str/lower-case (str k)) (str/lower-case (str ?s)))))
        (into {})))
 
 (defn add-item-in-db-vector [username password map]
   (swap! map conj {username password})
-  )
-
-
-
+  )                                                         ;bu kod çalışıyor
 
 (e/defn App []
         (e/client
           ;--------------------------------------STATEMENTS----------------------------------------
           (dom/h1 (dom/text "MAIN PAGE"))
 
-          (let [!db-vector (atom [])
+          (let [!db-vector (atom {})
                 !state (atom {
                               :in          ""
                               :in2         ""
@@ -87,7 +83,7 @@
 
             (ui/button
               (e/fn [] ((add-item-in-db-vector
-                          (keyword (get (e/watch !state) :button1))
+                          (get (e/watch !state) :button1)
                           (get (e/watch !state) :button2)
                           !db-vector)
                         (swap! !state assoc
@@ -122,8 +118,6 @@
 
             ;----------------------------SEARCH TAB AND SEARCH TABLE----------------------------------
             (dom/h3 (dom/text "Search Tab"))
-            (dom/h3 (dom/text (e/watch !db-vector)))
-            (dom/h3 (dom/text filteredMap))
 
             (e/client                                       ;input elementine girilen degeri alır ve !search atomuna atama yapar.
               (ui/input search (e/fn [v] (reset! !search v))

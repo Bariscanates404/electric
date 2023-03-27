@@ -20,7 +20,7 @@
 (def electric-main
   (hyperfiddle.electric/boot ; Electric macroexpansion - Clojure to signals compiler
     (binding [hyperfiddle.electric-dom2/node js/document.body]
-      (app.P09b-SearchFunctionByVectorDb/App.))))
+      (app.P09-SearchFunction/App.))))
 
 (defonce reactor nil)
 

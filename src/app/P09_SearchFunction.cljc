@@ -4,23 +4,40 @@
             [hyperfiddle.electric-ui4 :as ui]
             [clojure.string :as str]
             ))
-
 ;---------------------------------------DEFN FUNCTIONS-----------------------------------
-(defn filter-db [?s db]                                     ;Burada filter functionunda bulunan k v sembollerinden k ile ararsak key v ile ararsak
-  ;value den arayabiliriz.
-  (->> db
-       (filter (fn [[k v]] (str/includes? (str/lower-case (str k)) (str/lower-case (str ?s)))))
-       (into {})))
-
-(defn add-item-in-db-map [username password map]
-  (swap! map assoc {username password})
+(defn table-id-counter [last-table-id table-id-atom]
+  (swap! table-id-atom inc last-table-id)
   )
 
+(defn filter-db-by-value [?s db id]
+  (->> (for [id (range 1 id)]
+         (db id))
+       (filter
+         (fn
+           [{:keys [name surname]}]
+           (let [k name
+                 v surname]
+             (str/includes? (str/lower-case (str v)) (str/lower-case (str ?s))))))))
+
+(defn filter-db-by-key [?s db id]
+  (->> (for [id (range 1 id)]
+         (db id))
+       (filter
+         (fn
+           [{:keys [name surname]}]
+           (let [k name
+                 v surname]
+             (str/includes? (str/lower-case (str k)) (str/lower-case (str ?s))))))))
+
+(defn add-item-in-db-vector [username password map table-id]
+  (swap! map assoc-in [table-id] {:name username :surname password})
+  )
 
 (e/defn App []
         (e/client
           ;--------------------------------------STATEMENTS----------------------------------------
           (dom/h1 (dom/text "MAIN PAGE"))
+
           (let [!db-map (atom {})
                 !state (atom {
                               :in          ""
@@ -36,7 +53,12 @@
                 in2 (get (e/watch !state) :in2)
                 !search (atom "")
                 search (e/watch !search)
-                filteredMap (filter-db search (e/watch !db-map))]
+                !table-id (atom 1)
+                table-id (e/watch !table-id)
+                filtered-map-by-value (filter-db-by-value search (e/watch !db-map) table-id)
+                filtered-map-by-key (filter-db-by-key search (e/watch !db-map) table-id)
+
+                ]
 
             ;----------------------------------HTML/DOM ELEMENTS----------------------------------
             (ui/input in
@@ -83,10 +105,11 @@
                       )
 
             (ui/button
-              (e/fn [] ((add-item-in-db-map
-                          (keyword (get (e/watch !state) :button1))
+              (e/fn [] ((add-item-in-db-vector
+                          (get (e/watch !state) :button1)
                           (get (e/watch !state) :button2)
-                          !db-map)
+                          !db-map table-id)
+                        (table-id-counter table-id !table-id)
                         (swap! !state assoc
                                :bg-color2 "inherit"
                                :bg-color "inherit"
@@ -107,11 +130,14 @@
                 (dom/tr
                   (dom/th (dom/text "Name"))
                   (dom/th (dom/text "Surname")))
-                (e/for-by first [[k v] (e/watch !db-map)]
-                          (dom/tr
-                            (dom/td (dom/text k))
-                            (dom/td (dom/props {:style {:white-space :nowrap}}) (dom/text v))
-                            ))
+                (e/for [{:keys [name surname]} filtered-map-by-value]
+                       (let [k name
+                             v surname]
+                         (dom/tr
+                           (dom/td (dom/text k))
+                           (dom/td (dom/props {:style {:white-space :nowrap}}) (dom/text v))
+                           ))
+                       )
                 )
               )
 
@@ -119,7 +145,7 @@
 
             ;----------------------------SEARCH TAB AND SEARCH TABLE----------------------------------
             (dom/h3 (dom/text "Search Tab"))
-            (dom/h3 (dom/text (e/watch !db-map)))
+            (dom/h5 (dom/text "Search by key"))
             (e/client                                       ;input elementine girilen degeri alır ve !search atomuna atama yapar.
               (ui/input search (e/fn [v] (reset! !search v))
                         (dom/props {:type "search"}))
@@ -132,14 +158,41 @@
                 (dom/tr
                   (dom/th (dom/text "Name"))
                   (dom/th (dom/text "Surname")))
-                (e/for-by first [[k v] filteredMap]
-                          (dom/tr
-                            (dom/td (dom/text k))
-                            (dom/td (dom/props {:style {:white-space :nowrap}}) (dom/text v))
-                            ))
+                (e/for [{:keys [name surname]} filtered-map-by-value]
+                       (let [k name
+                             v surname]
+                         (dom/tr
+                           (dom/td (dom/text k))
+                           (dom/td (dom/props {:style {:white-space :nowrap}}) (dom/text v))
+                           ))
+                       )
                 )
               )
+
+            (dom/h5 (dom/text "Search by value"))
+            (e/client                                       ;input elementine girilen degeri alır ve !search atomuna atama yapar.
+              (ui/input search (e/fn [v] (reset! !search v))
+                        (dom/props {:type "search"}))
+
+              )
+
+            (dom/table
+              (dom/props {:class "hyperfiddle"})
+              (dom/table
+                (dom/tr
+                  (dom/th (dom/text "Name"))
+                  (dom/th (dom/text "Surname")))
+                (e/for [{:keys [name surname]} filtered-map-by-key]
+                       (let [k name
+                             v surname]
+                         (dom/tr
+                           (dom/td (dom/text k))
+                           (dom/td (dom/props {:style {:white-space :nowrap}}) (dom/text v))
+                           ))
+                       )
+                )
+              )
+
             )
           )
         )
-
