@@ -2,23 +2,53 @@
   (:require [study.reusable-functions :as rf]))
 
 
-;Girdi:
+;Input:     <--------
 ;
 ;```clojure
 ;[{:name "ali" :surname "veli"}
 ; {:name "batu" :surname "can"}]
 ;```
 ;
-;Çıktı:
-;
+;Output:    <-------
+;task 1     <---
 ;```clojure
-;[["ali" "veli"]
+; [["ali" "veli"]
 ; ["batu" "can"]]
 
-;(map (fn [[k v]] [k v]) {:a 1 :b 2}) ; ([:a 1] [:b 2])
 
 (def my-vec [{:name "ali" :surname "veli"}
              {:name "batu" :surname "can"}])
+
+(rf/transform-outer-coll-to-vector (rf/flatten-one-level (for [lenght (range 0 (count my-vec))]
+                                                           (update [] 0 #(str (into [] (vals (get my-vec lenght))) %)))))
+;task 1     <---
+;==> [["ali" "veli"] ["batu" "can"]]
+
+
+
+(rf/transform-outer-coll-to-vector(map (juxt :name :surname) my-vec))
+;=> [["ali" "veli"] ["batu" "can"]]
+(mapv (juxt :name :surname) my-vec)
+;=> [["ali" "veli"] ["batu" "can"]]
+
+(->> my-vec (mapv (comp vec vals)))
+;=> [["ali" "veli"] ["batu" "can"]]
+
+(mapv (fn [data] [(:name data) (:surname data)]) my-vec)
+;=> [["ali" "veli"] ["batu" "can"]]
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 (flatten (flatten my-vec))
 ;=> ({:name "ali", :surname "veli"} {:name "batu", :surname "can"})
@@ -40,9 +70,3 @@
 
 
 
-(println
-  (rf/transform-outer-coll-to-vector (rf/flatten-one-level (for [lenght (range 0 (count my-vec))]
-                                                             (update [] 0 #(str (into [] (vals (get my-vec lenght))) %)))))
-  )
-
-;==> [["ali" "veli"] ["batu" "can"]]

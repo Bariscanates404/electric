@@ -1,0 +1,3 @@
+(ns study.Destructruing.VectorDestructuring)
+
+
