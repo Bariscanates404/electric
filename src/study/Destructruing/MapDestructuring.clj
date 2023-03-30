@@ -1,7 +1,7 @@
 (ns study.Destructruing.MapDestructuring)
 
-(def car-map {:make "bwm"
-              :model ["m4" "m3" "2 series"]
+(def car-map {:make    "bwm"
+              :model   ["m4" "m3" "2 series"]
               :country "Germany"}
   )
 
@@ -22,7 +22,7 @@
 
 (defn destructure-fn [x]
   (let [{country :country
-         make :make} x]
+         make    :make} x]
     (str make " " country)))
 
 (destructure-fn car-map)
@@ -38,10 +38,72 @@
 
 
 ;-----------------------------------XXX----------------------------------
-(defn destructure-fn [x]
-  (let [{:keys [make country] [first-model _ second-model] :model ]} x]
-    (str make " " country " " model)))
+(let [{a :a} {:a  "A"
+              :b  "B"
+              :c  "C"
+              "d" "D"}]
+  a)
+;=> "A"
 
-(destructure-fn car-map)
+(let [{:keys [a b c]} {:a  "A"
+                       :b  "B"
+                       :c  "C"
+                       "d" "D"}]
+  c)
+;=> "C"
+
+(let [{:keys [a b c d]} {:a  "A"
+                         :b  "B"
+                         :c  "C"
+                         "d" "D"}]
+  d)
+;=> nil  d keyword degil bu sebeple nill doner.
+
+(let [{:keys [a b c d]
+       :strs [d]} {:a  "A"
+                   :b  "B"
+                   :c  "C"
+                   "d" "D"}]
+  d)
+;=> "D"     d keyword degil bir string keybu sebeple :strs i kullanarak döndurebiliriz.
+
+(let [{:keys [a b c d]
+       :strs [d]
+       :syms [e]} {:a  "A"
+                   :b  "B"
+                   :c  "C"
+                   "d" "D"
+                   'e  "E"}]
+  e)
+;=> "E"
+
+(let [{:keys [a b c d]
+       :strs [d]
+       :syms [e]
+       :as   all} {:a  "A"
+                   :b  "B"
+                   :c  "C"
+                   "d" "D"
+                   'e  "E"}]
+  all)
+;=> {:a "A", :b "B", :c "C", "d" "D", e "E"}
 
 ;-----------------------------------XXX----------------------------------
+
+(let [[_ {[_ _ [_ _ {hello :hello}]] :v}] [{:something "something"}
+                                           {:idk "some-value"
+                                            :v   [1 2 [2 4 {:hello "world"}]]}]]
+  hello)
+;=> "world"
+
+;-----------------------------------XXX----------------------------------
+
+(def my-map {:x 10 :y  20 :z 30})
+
+(let [{x :x y :y z :z} my-map]
+  (+ x y z))
+;=> 60
+
+(let [{:keys [x y z]} my-map]
+  (+ x y z))
+;=> 60
