@@ -60,7 +60,8 @@
              (if (str/includes? (str/lower-case (str v)) (str/lower-case (str ?s)))
                (str/lower-case (str v))
                (str/lower-case "NO!"))
-             )))))
+             )))
+       (into {})))
 
 (filter-db-by-surname "ca" my-vec 3)
 ;=> ([:id 2] [:name "batu"] [:surname "can"])
@@ -68,22 +69,6 @@
 
 ; expected output: [2 {:id 2 :name "batu" :surname "can"}]  <<<<---------------------
 
-
-
-
-;;Sorted set arama yontemi
-(def my-set (sorted-set-by #(apply compare (map :surname %&))
-                          {:id 1 :name "ali" :surname "veli"}
-                          {:id 2 :name "batu" :surname "can"}))
-
-(first (subseq my-set >= {:surname "ca"}))
-;; => {:id 2, :name "batu", :surname "can"}
-
-
-
-
-;(def my-vec [1 {:id 1 :name "ali" :surname "veli"}
-;             2 {:id 2 :name "batu" :surname "can"}])
 (def my-set (into (sorted-set-by #(apply compare (map :surname %&)))
                   (take-nth 2 (rest my-vec))))
 
@@ -96,3 +81,4 @@
 (first (subseq my-set >= {:name "a":surname "a"}))
 
 (first(destructure-result-and-put-into-vector (first (subseq my-set >= {:surname "a"}))))
+;=> [2 {:id 2, :name "batu", :surname "can"}]

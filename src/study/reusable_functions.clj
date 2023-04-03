@@ -1,4 +1,6 @@
 (ns study.reusable-functions)
+(use 'clojure.walk)
+
 
 
 
@@ -31,15 +33,6 @@
     #(if (sequential? %) % [%])
     coll))
 
-;verilen collu iki seviye düzleştirir.
-(defn flatten-one-level-2 [coll]
-  (->> coll
-       (mapcat
-         #(if
-            (sequential? %)
-            %
-            [%]))))
-
 ; en dış koleksiyonu vector'e dönüştürür.
 (defn transform-outer-coll-to-vector [coll]
   (apply vector coll)
@@ -61,7 +54,7 @@
 ;input => [{"name" "ali", "surname" "veli"} {"name" "batu", "surname" "can"}]
 ;output =>[{:name "ali", :surname "veli"} {:name "batu", :surname "can"}]
 ;Verilen coll un içerisinde recursivly olarak döner ve bütün keyleri keyworde dönüştürür.
-(defn keywordize-keys
+(defn keywordize-keys-1
   "Recursively transforms all map keys from strings to keywords."
   [m]
   (let [f (fn [[k v]] (if (string? k) [(keyword k) v] [k v]))]
@@ -71,7 +64,7 @@
 ;input =>  [{:name "ali", :surname "veli"} {:name "batu", :surname "can"}]
 ;output => [{"name" "ali", "surname" "veli"} {"name" "batu", "surname" "can"}]
 ;Verilen coll un içerisinde recursivly olarak döner ve bütün keyleri stringe dönüştürür.
-(defn stringify-keys-2
+(defn stringify-keys-1
   "Recursively transforms all map keys from keywords to strings."
   [m]
   (let [f (fn [[k v]] (if (keyword? k) [(name k) v] [k v]))]
@@ -86,3 +79,14 @@
   "remove elem in coll"
   [pos coll]
   (into (subvec coll 0 pos) (subvec coll (inc pos))))
+
+
+;(use 'clojure.walk)
+;verdiğiniz nested map'i içeriğini tamamen aynı şekilde koruyarak butün mapleri vectore dönüştürür.
+;input--->   {1 {:id 1 :x [:name "ali"] :surname "veli"} 2 {:id 2 :name "batu" :surname "can"}}
+;output==>   [1 [:id 1 :x [:name "ali"] :surname "veli"] 2 [:id 2 :name "batu" :surname "can"]]
+(defn transform-maps-to-vector [map]
+  (postwalk (fn [x]
+              (if (map? x) (into [] cat x) x))
+            map)
+  )

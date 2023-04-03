@@ -73,3 +73,6 @@
           o))
       my-new-vec)
 ;=> [1 ["ali" "veli"] ["ali" "veli"] 2 ["ali" "veli"] 2 ["ali" "veli"] 2 ["ali" "veli"] 3 2 ["ali" "veli"]]
+(rf/transform-maps-to-vector my-vec)
+;=> [1 [:id 1 :name "ali" :surname "veli"] 2 [:id 2 :name "batu" :surname "can"]]
+

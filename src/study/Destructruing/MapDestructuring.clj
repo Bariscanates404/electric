@@ -1,5 +1,10 @@
 (ns study.Destructruing.MapDestructuring)
 
+;güzel bir kaynak ------>> https://gist.github.com/john2x/e1dca953548bfdfb9844
+
+
+
+
 (def car-map {:make    "bwm"
               :model   ["m4" "m3" "2 series"]
               :country "Germany"}
