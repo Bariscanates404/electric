@@ -43,9 +43,9 @@
       )))
 
 
-(for [lenght (range 0 4)]
-  (if (map? (my-map lenght))
-    (destructure-fn (my-map lenght) "a")
+(for [len (range 0 4)]
+  (if (map? (my-map len))
+    (destructure-fn (my-map len) "a")
     (str "no")
     )
   )

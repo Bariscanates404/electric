@@ -34,15 +34,15 @@
              2 {:id 2 :name "batu" :surname "can"}
              })
 
-(for [lenght (range 1 (+ 1 (count my-map)))]
-  (my-map lenght)
+(for [len (range 1 (+ 1 (count my-map)))]
+  (my-map len)
   )
 
 
 ;-------------------------------------------d01------------------------------------------------
 (defn filter-db-by-surname [?s db]
-  (->> (for [lenght (range 1 (+ 1 (count my-map)))]
-         (db lenght))                                           ;=> {:id 2, :name "batu", :surname "can"}
+  (->> (for [len (range 1 (+ 1 (count my-map)))]
+         (db len))                                           ;=> {:id 2, :name "batu", :surname "can"}
        (filter
          (fn
            [{:keys [id name surname]} ]
@@ -80,9 +80,9 @@
         )
       ))
 
-(for [lenght (range 1 (+ 1 (count my-map)))]
-  (if (map? (my-map lenght))
-    (destructure-fn (my-map lenght) "ca")
+(for [len (range 1 (+ 1 (count my-map)))]
+  (if (map? (my-map len))
+    (destructure-fn (my-map len) "ca")
     )
   )
 

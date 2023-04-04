@@ -12,8 +12,8 @@
 (my-map 1)
 
 
-(rf/transform-outer-coll-to-vector (map (juxt :name :surname) (for [lenght (range 1 (+ 1 (count my-map)))]
-                                                                (my-map lenght)
+(rf/transform-outer-coll-to-vector (map (juxt :name :surname) (for [len (range 1 (+ 1 (count my-map)))]
+                                                                (my-map len)
                                                                 )))
 ;=> [["ali" "veli"] ["batu" "can"]]
 

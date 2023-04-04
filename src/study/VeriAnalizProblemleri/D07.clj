@@ -36,9 +36,9 @@
       )))
 
 
-(for [lenght (range 0 (count my-vec))]
-   (if (map? (my-vec lenght))
-     (destructure-fn (my-vec lenght))
+(for [len (range 0 (count my-vec))]
+   (if (map? (my-vec len))
+     (destructure-fn (my-vec len))
      (str "no")
      )
    )

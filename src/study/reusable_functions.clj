@@ -90,3 +90,19 @@
               (if (map? x) (into [] cat x) x))
             map)
   )
+
+;Imperative style for loop
+;input (for-loop [i 0 (< i 4) (inc i)]
+;  (println i))
+;output ==>
+;;0
+;;1
+;;2
+;;3
+;; ==> nil
+(defmacro for-loop-imperative-style [[sym init check change :as params] & steps]
+  `(loop [~sym ~init value# nil]
+     (if ~check
+       (let [new-value# (do ~@steps)]
+         (recur ~change new-value#))
+       value#)))

@@ -19,8 +19,8 @@
 (def my-vec [{:name "ali" :surname "veli"}
              {:name "batu" :surname "can"}])
 
-(rf/transform-outer-coll-to-vector (rf/flatten-one-level (for [lenght (range 0 (count my-vec))]
-                                                           (update [] 0 #(str (into [] (vals (get my-vec lenght))) %)))))
+(rf/transform-outer-coll-to-vector (rf/flatten-one-level (for [len (range 0 (count my-vec))]
+                                                           (update [] 0 #(str (into [] (vals (get my-vec len))) %)))))
 ;task 1     <---
 ;==> [["ali" "veli"] ["batu" "can"]]
 
@@ -62,8 +62,8 @@
 
 (vals (get my-vec 1))
 (get my-vec 1)
-(for [lenght (range 0 2)]
-  (map prn (into [] (vals (get my-vec lenght))) [my-vec])
+(for [len (range 0 2)]
+  (map prn (into [] (vals (get my-vec len))) [my-vec])
   )
 
 ;=> ([["ali" "veli"] ["batu" "can"] ["ali" "veli"]] [["ali" "veli"] ["batu" "can"] ["ali" "veli"] ["batu" "can"]])
