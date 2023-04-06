@@ -69,29 +69,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 (comment
   (def search "")
   (def !db-vector [{:ali "veli"}])

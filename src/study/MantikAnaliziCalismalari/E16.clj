@@ -54,35 +54,35 @@
 ;şimdi iterasyonalra bakalım ==>
 ; inputumuz= '( 1 2 3 4 5)
 ; 1. tur
-((fn [cum item]                                              ;function
+((fn [cum item]                                             ;function
    (if (odd? item)
-     (conj cum item)                                         ; if odd, append to cum result
-     cum                                                     ; if even, leave cum result unchanged
+     (conj cum item)                                        ; if odd, append to cum result
+     cum                                                    ; if even, leave cum result unchanged
      )) [] 1)
 ;   1  => [1]
 
 ; 2. tur
-((fn [cum item]                                              ;function
-  (if (odd? item)
-    (conj cum item)                                         ; if odd, append to cum result
-    cum                                                     ; if even, leave cum result unchanged
-    )) [] 2)
+((fn [cum item]                                             ;function
+   (if (odd? item)
+     (conj cum item)                                        ; if odd, append to cum result
+     cum                                                    ; if even, leave cum result unchanged
+     )) [] 2)
 ;   2  => [1] degismedi
 
 ; 3. tur
-((fn [cum item]                                              ;function
-  (if (odd? item)
-    (conj cum item)                                         ; if odd, append to cum result
-    cum                                                     ; if even, leave cum result unchanged
-    )) [] 3)
+((fn [cum item]                                             ;function
+   (if (odd? item)
+     (conj cum item)                                        ; if odd, append to cum result
+     cum                                                    ; if even, leave cum result unchanged
+     )) [] 3)
 ;   3  => [1 3]
 
 ; 4. tur
-((fn [cum item]                                              ;function
-  (if (odd? item)
-    (conj cum item)                                         ; if odd, append to cum result
-    cum                                                     ; if even, leave cum result unchanged
-    )) [] 4)
+((fn [cum item]                                             ;function
+   (if (odd? item)
+     (conj cum item)                                        ; if odd, append to cum result
+     cum                                                    ; if even, leave cum result unchanged
+     )) [] 4)
 ;   4  => [1 3] degismedi
 
 ; 5. tur
