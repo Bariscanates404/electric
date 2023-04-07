@@ -32,7 +32,7 @@
 ;=> "bmw"
 
 (def list-of-cars-models [["bmw" "m4"] ["mercedes" "a200"] ["fiat" "500"]])
-
+""
 (defn destructure-fn [x]
   (let [[first-make _ second-make] x]
     second-make ))
