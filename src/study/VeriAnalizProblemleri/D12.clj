@@ -23,48 +23,31 @@
 
 (def my-vec [{:id   1
               :name {:first "ali" :last "veli"}}
-              {:id   2
-               :name {:first "batu" :last "can"}}]
+             {:id   2
+              :name {:first "batu" :last "can"}}]
   )
 
 
-(let [{:keys [first last]}  (get-in (get-in my-vec [0]) [:name])]
-  ( pr first last))
+(let [{:keys [first last]} (get-in (get-in my-vec [0]) [:name])]
+  (conj [] first last))
 ;1 ali veli
 
 (get-in (get-in my-vec [0]) [:name])
+;=> {:first "ali", :last "veli"}
+
+(count my-vec)
+;=> 2
 
 
-(defn filter-map-func-name [coll ?s]
+(defn d11 [coll]
   (reduce
     (fn [x y]
-      (let [{:keys [id name surname]} y]
-        (if (str/includes? (str/lower-case name) (str/lower-case ?s))
-          (conj x (vector id name))
-          x)))
+      (let [{:keys [first last]} y]
+        (conj x (vector first last))
+        ))
     []
-    (for [len (range 1 (+ 1 (count coll)))]
-      (my-map len)
+    (for [len (range 0 (count coll))]
+      (get-in (get-in coll [len]) [:name])
       )))
-
-(filter-map-func-name my-map "a")
-
-(defn filter-map-func-surname [coll ?s]
-  (reduce
-    (fn [x y]
-      (let [{:keys [id name surname]} y]
-        (if (str/includes? (str/lower-case surname) (str/lower-case ?s))
-          (conj x (vector id surname))
-          x)))
-    []
-    (for [len (range 1 (+ 1 (count coll)))]
-      (my-map len)
-      )))
-
-(filter-map-func-surname my-map "a")
-
-(defn search-func-d11 [coll ?s]
-  (conj (filter-map-func-name coll ?s) (filter-map-func-surname coll ?s))
-  )
-
-(search-func-d11 my-map "a")
+(d11 my-vec)
+;=> [["ali" "veli"] ["batu" "can"]]
