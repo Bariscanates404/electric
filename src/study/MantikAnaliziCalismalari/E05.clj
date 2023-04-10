@@ -6,8 +6,8 @@
 
   (mapv
     (fn [data] [(:id data) (:name data) (:surname data)])
-    (for [lenght (range 1 (+ 1 (count my-map)))]
-      (my-map lenght)
+    (for [len (range 1 (+ 1 (count my-map)))]
+      (my-map len)
       ))
   ;mapv argüman olarak fonksiyon + collection alıyor.
   ;öncelikle
@@ -21,10 +21,13 @@
   ;=> ({:id 1, :x [:name "ali"], :surname "veli"} {:id 2, :name "batu", :surname "can"})
 
   ;şimdi fonksiyonumuzu debug edelim.
+  ;1. iteration
   (f {:id 1, :name "ali", :surname "veli"})
   ;=> [1 "ali" "veli"]
-  ;(fn [data] [(:id data) (:name data) (:surname data)]) bu fonksiyona verilen mapi alıyor
-  ;ve bu map içerisindeki id name surname keylerinin değerlerini bize döndürüyor.
+  ;2. iteration
+  (f {:id 2 :name "batu" :surname "can"})
+  ;=> [2 "batu" "can"]
+  ;sonuç olarak   => [[1 "ali" "veli"] [2 "batu" "can"]] çıktısını alırız.
   (mapv f coll)
   ;=> [[1 "ali" "veli"] [2 "batu" "can"]]
 

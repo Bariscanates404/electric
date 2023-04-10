@@ -6,48 +6,62 @@
 
 ;derin nested map yada vectorleri tamamen düzleştirmek için bir method.
 ;input
-;(def sample [{:top {:top {:top [:bottom {:top {:top [:bottom :bottom :bottom]}} :bottom :bottom :bottom]}}},
-;                        {:top {:top [:bottom :bottom :bottom]}},
-;                        {:top [:bottom :bottom]}])
+;(def sample [{:top {:top {:top "merhaba"}}}])
 ;output
-;(:top :top :top :bottom :top :top :bottom :bottom :bottom
-; :bottom :bottom :bottom :top :top :bottom :bottom
-; :bottom :top :bottom :bottom)
+;=> (:top :top :top "merhaba")
 (defn flat-a-coll [coll]
   (if (coll? coll)
     (mapcat flat-a-coll coll)
     [coll]))
 
+(comment
+  (def sample [{:top {:top {:top "merhaba"}}}])
+  (flat-a-coll sample)
+  ;=> (:top :top :top "merhaba")
+  )
+
 ;derin bir nested collectionu tamamen düzleştirir ve sadece keywordleri döner.
-;(:top :top :top :bottom :top :top :bottom :bottom
-; :bottom :bottom :bottom :bottom :top :top :bottom
-; :bottom :bottom :top :bottom :bottom)
+;(def sample [{:top {:top {:top "merhaba"}}}])
+;=> (:top :top :top)
 (defn flatten-and-get-keywords [coll]
   (filter keyword? (tree-seq coll? seq coll))
   )
 
+(comment
+  (def sample [{:top {:top {:top "merhaba"}}}])
+  (flatten-and-get-keywords sample)
+  ;=> (:top :top :top)
+  )
 
-;verilen coll u bir seviye düzleştirir.
+
+;verilen coll'u bir seviye düzleştirir.
 (defn flatten-one-level [coll]
   (mapcat
     #(if (sequential? %) % [%])
     coll))
 
+
 ; en dış koleksiyonu vector'e dönüştürür.
-(defn transform-outer-coll-to-vector [coll]
+(defn transform-to-vector [coll]
   (apply vector coll)
   )
 
 ; en dış koleksiyonu map'e dönüştürür.
-(defn transform-outer-coll-to-map [coll]
+(defn transform-to-map [coll]
   (apply hash-map coll)
   )
 
-; Verilen vectorun içerisindeki elementleri sıra sıra gezer ve biz döndürür.
+; Verilen vectorun içerisindeki elementleri sıra sıra gezer ve bize döndürür.
+;input    (def my-vec [["name" "ali"] ["name" "batu"] "surname" "veli" "surname" "can"])
+;output   => (["name" "ali"] ["name" "batu"] "surname" "veli" "surname" "can")
 (defn walk-inside-a-vector-elements [coll]
-  (for [lenght (range 0 (count coll))]
-    (get coll lenght)
+  (for [len (range 0 (count coll))]
+    (get coll len)
     )
+  )
+(comment
+  (def my-vec [["name" "ali"] ["name" "batu"] "surname" "veli" "surname" "can"])
+  (walk-inside-a-vector-elements my-vec )
   )
 
 

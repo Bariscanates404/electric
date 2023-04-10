@@ -19,14 +19,16 @@
 (def my-vec [{:name "ali" :surname "veli"}
              {:name "batu" :surname "can"}])
 
-(rf/transform-outer-coll-to-vector (rf/flatten-one-level (for [len (range 0 (count my-vec))]
-                                                           (update [] 0 #(str (into [] (vals (get my-vec len))) %)))))
+(rf/transform-to-vector
+  (rf/flatten-one-level
+    (for [len (range 0 (count my-vec))]
+      (update [] 0 #(str (into [] (vals (get my-vec len))) %)))))
 ;task 1     <---
 ;==> [["ali" "veli"] ["batu" "can"]]
 
 
 
-(rf/transform-outer-coll-to-vector(map (juxt :name :surname) my-vec))
+(rf/transform-to-vector (map (juxt :name :surname) my-vec))
 ;=> [["ali" "veli"] ["batu" "can"]]
 (mapv (juxt :name :surname) my-vec)
 ;=> [["ali" "veli"] ["batu" "can"]]

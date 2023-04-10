@@ -1,6 +1,6 @@
 (ns study.MantikAnaliziCalismalari.E04)
 
-(comment
+
   (def given-map {:a 1 :b 2 :c nil})
 
   (merge
@@ -19,11 +19,29 @@
   ;=> true
   (not (nil? nil))
   ;=> false
+
+
+  (def k :a)
+  (def v :1)
   ;şimdi for loop'u muzu şu şekilde yazabiliriz.
   (for [[k v] given-map
         :when
         true] {k v})
-  ;=> ({:a 1} {:b 2} {:c nil})  buradan true degeri verdiğimiz formun nil değerleri ayıklayan
-  ;önemli bir kod olduğunu görüyoruz. Eğer direkt olarak True verirsek destructure
+;1. iteration {:a 1}
+(def k :b)
+(def v :2)
+;şimdi for loop'u muzu şu şekilde yazabiliriz.
+(for [[k v] given-map
+      :when
+      true] {k v})
+;1. iteration {:b 2}
 
-  )
+(def k :c)
+(def v nil)
+;şimdi for loop'u muzu şu şekilde yazabiliriz.
+(for [[k v] given-map
+      :when
+      false] {k v})
+;1. iteration {}
+;sonuç olarak ({:a 1} {:b 2}) bu dönecek.
+

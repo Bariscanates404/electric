@@ -16,7 +16,7 @@
 
 
 ;burada fonksiyonu debug etmek istiyorum
-((fn [o] (if (map? o)
+#_((fn [o] (if (map? o)
           ((juxt :name :surname) o) o)
   )
  '("collection-here")
@@ -31,7 +31,7 @@
 ((fn [o] (if (map? o)
            ((juxt :name :surname) o) o)
    )
- '(1)
+ 1
  )
 ;=> (1)
 
@@ -47,7 +47,7 @@
 ((fn [o] (if (map? o)
            ((juxt :name :surname) o) o)
    )
- '(2)
+ 2
  )
 ;=> (2)
 

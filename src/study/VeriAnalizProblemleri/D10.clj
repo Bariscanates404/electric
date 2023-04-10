@@ -36,14 +36,14 @@
 (defn filter-vector-func [coll ?s]
   (reduce
     (fn [x y]
-      (let [[first second :as all] y]
+      (let [[ :as all] y]
         (if (str/includes? (str/lower-case all) (str/lower-case ?s))
           (conj x all)
           x)))
     []
     coll))
 
-(rf/transform-outer-coll-to-vector(filter-vector-func my-vec "name"))
+(rf/transform-to-vector(filter-vector-func my-vec "name"))
 ;[["name" "ali"] ["name" "batu"] ["surname" "veli"] ["surname" "can"]]
 
 

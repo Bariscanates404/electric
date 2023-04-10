@@ -8,15 +8,11 @@
 (def my-map {1 {:id 1 :name "ali" :surname "veli"}
              2 {:id 2 :name "batu" :surname "can"}})
 
-
-
-
 ((juxt :id :name :surname) {:id 1 :name "ali" :surname "veli"})
 ;=> [1 "ali" "veli"]
 
 (juxt :id :name :surname)
 ;=> [[1 "ali" "veli"] [2 "batu" "can"]]
-
 
 ((juxt take drop) 3 [1 2 3 4 5 6])
 ;juxt formuna arguman olarak verilen fonksiyonları soldan sağa doğru çalıştırır.
