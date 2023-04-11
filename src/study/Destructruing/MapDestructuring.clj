@@ -112,3 +112,26 @@
 (let [{:keys [x y z]} my-map]
   (+ x y z))
 ;=> 60
+
+
+
+
+
+
+
+
+;; NESTED DEEP MAPS ;;
+
+(def my-nested-map-3 {:id 1 :name {:first "ali" :last "veli"} :surname {:snf "foo" :snl "bar" :location {:country "usa"}} :age 26})
+;burada uzun bir şekilde yapılmış bir destruction görüyoruz.
+
+(let [{:keys [id age] {:keys [first last]} :name {:keys [snf snl], {:keys [country]} :location} :surname}
+      my-nested-map-3]
+  (print id age first last snf snl country))
+
+
+(let [{:keys [id name surname age]} my-nested-map-3  ;1. seviye map - içerisinde bulunan bütün öğelerin pairlerini döner
+      {:keys [first last]} name ;2. seviye map - name keyi içerisinde bulunan pairleri döner
+      {:keys [snf snl location]} surname ;  2. seviye map - surname keyi içerisinde bulunan pairleri döner
+      {:keys [country]} location] ;3. seviye map - location keyi  içeirsinde bulunan pairleri döndürür
+  (print id age first last snf snl country))

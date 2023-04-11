@@ -35,6 +35,8 @@
       )))
 
 (filter-map-func-name my-map "a")
+;=> [[1 "ali"] [2 "batu"]]
+
 
 (defn filter-map-func-surname [coll ?s]
   (reduce
@@ -55,7 +57,10 @@
   )
 
 (search-func-d11 my-map "a")
+;=> [[1 "ali"] [2 "batu"] [[2 "can"]]]
 
+(search-func-d11 my-map "l")
+;=> [[1 "ali"] [[1 "veli"]]]
 
 ;set op union.
 

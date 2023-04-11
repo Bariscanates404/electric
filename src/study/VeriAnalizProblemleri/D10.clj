@@ -43,8 +43,12 @@
     []
     coll))
 
-(rf/transform-to-vector(filter-vector-func my-vec "name"))
+(rf/transform-to-vector(filter-vector-func my-vec "a"))
 ;[["name" "ali"] ["name" "batu"] ["surname" "veli"] ["surname" "can"]]
+
+(rf/transform-to-vector(filter-vector-func my-vec "v"))
+;=> [["surname" "veli"]]
+
 
 
 (let [[first second :as all] my-vec]
