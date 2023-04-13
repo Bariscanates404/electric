@@ -135,3 +135,20 @@
       {:keys [snf snl location]} surname ;  2. seviye map - surname keyi içerisinde bulunan pairleri döner
       {:keys [country]} location] ;3. seviye map - location keyi  içeirsinde bulunan pairleri döndürür
   (print id age first last snf snl country))
+
+
+
+
+
+;plumbing library kullanarak destructuring yapmak==>
+(use '[plumbing.core])
+((let [data {:id      1 :name {:first "ali" :last "veli"}
+             :surname {:snf "foo" :snl "bar" :location {:country "usa"}}
+             :age     26}]
+   (let [[id name surname] data
+         [first last] name
+         [snf snl location] surname
+         [country] location]
+     country)
+   )
+ )

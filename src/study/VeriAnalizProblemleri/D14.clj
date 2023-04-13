@@ -65,6 +65,17 @@
 
 
 
+;başka bir yöntem.
+(defn attach-full-name [{{:keys [first last]} :name
+                         :as data}]
+  (update data :name assoc :full (str first " " last)))
+
+
+(swap! !my-map update-vals attach-full-name)
+
+;; {1 {:id 1, :name {:first "ali", :last "veli", :full "ali veli"}},
+;;  2 {:id 2, :name {:first "batu", :last "can", :full "batu can"}}}
+
 
 ;farklı bir deneme ama bana karışık geliyor. yukarıdaki çözümler daha net ve anlaışabilir.
 (swap! !my-map update-vals
