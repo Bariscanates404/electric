@@ -21,7 +21,8 @@
   )
 
 
-
+;-------------------------------------------d01------------------------------------------------
+;==> a01
 (defn filter-map-func-name [coll ?s]
   (reduce
     (fn [x y]
@@ -62,33 +63,8 @@
 (search-func-d11 my-map "l")
 ;=> [[1 "ali"] [[1 "veli"]]]
 
-;set op union.
 
 
 (let [{:keys [id name surname]} {:id 1 :name "ali" :surname "veli"}]
   (println id name surname))
 ;1 ali veli
-
-
-
-
-
-
-
-;recude fonksiyonuna bir collection olarak map verdiğinizde direk ilk k-v ögesini alıyor buda hatalı çalışmasına sebep oluyor.
-;reduce fonksiyonuna collectionları vector içerisinde vermek bu sorunu çözüyor.
-
-#_(defn filter-vector-func [coll ?s]
-    (reduce
-      (fn [x y]
-        (prn :x x)
-        (prn :y y)
-        (let [{:keys [id name surname]} y]
-          (if (str/includes? (str/lower-case name) (str/lower-case ?s))
-            (conj x id name)
-            x)))
-      []
-      coll))
-
-
-;(filter-vector-func {:id 1 :name "ali" :surname "veli"} "a")

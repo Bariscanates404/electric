@@ -1,28 +1,5 @@
-(ns study.VeriAnalizProblemleri.D10
-  (:require
-    [clojure.string :as str]
-    [study.reusable-functions :as rf]))
+(ns study.MantikAnaliziCalismalari.E24)
 
-;Girdi:
-;
-;```clojure
-;{1 {:id 1 :name "ali" :surname "veli"}
-; 2 {:id 2 :name "batu" :surname "can"}}
-;```
-;
-;Arama anahtar kelimesi:
-;
-;```
-;"a"
-;```
-;
-;Bu anahtar kelimeyi tüm property'lerde arayın. Eşleşen property'leri key-value ikilileri olarak dönün.
-;
-;Çıktı:
-;
-;```clojure
-;[["name" "ali"] ["name" "batu"] ["surname" "can"]]
-;```
 
 
 (def my-map {1 {:id 1 :name "ali" :surname "veli"}
@@ -31,96 +8,6 @@
 
 (def my-vec (into [] (for [m (vals my-map) [k v] m] [(name k) v])))
 ;=> [["id" 1] ["name" "ali"] ["surname" "veli"] ["id" 2] ["name" "batu"] ["surname" "can"]]
-
-;-------------------------------------------d01------------------------------------------------
-;a01 ==> burada standart reduce fonksiyonu ile yaptık.
-(defn filter-vector-func2 [coll ?s]
-  (reduce
-    (fn [x y]
-      (let [[:as all] y]
-        (if (str/includes? (str/lower-case all) (str/lower-case ?s))
-          (conj x all)
-          x)))
-    []
-    coll))
-
-(comment
-
-  (def ?s "x")
-  (def f (fn [x y]
-           (let [[:as all] y]
-             (if (str/includes? (str/lower-case all) (str/lower-case ?s))
-               (conj x all)
-               x))))
-
-
-  (def y ["name" "ali"])
-
-  (f [] y)
-
-  ((fn [x y]
-     (let [[:as all] y]
-       (if (str/includes? (str/lower-case all) (str/lower-case ?s))
-         (conj x all)
-         x)))
-   []
-   ["name" "ali"]
-   )
-
-  (fn []
-    (let [[:as all] ["name" "ali"]]
-      (if (str/includes? (str/lower-case all) (str/lower-case ?s))
-        (conj [] all)
-        [])))
-
-  (if (str/includes? (str/lower-case "ali") (str/lower-case "a"))
-    (conj [] "ali")
-    [])
-  ;=> ["ali"]
-  (if (str/includes? (str/lower-case "veli") (str/lower-case "a"))
-    (conj [] "ali")
-    [])
-  ;=> ["veli" "ali"]
-
-
-
-  (def ?s "a")
-  (let [[:as all] ["name" "ali"]]
-    (if (str/includes? (str/lower-case all) (str/lower-case ?s))
-      (conj [] all)
-      []))
-  ;==> [["name" "ali"]]
-
-  (def ?s "x")
-  (let [[:as all] ["name" "ali"]]
-    (if (str/includes? (str/lower-case all) (str/lower-case ?s))
-      (conj [] all)
-      []))
-  ;==> []
-
-  (if (str/includes? (str/lower-case ["ali" "veli"]) (str/lower-case "a"))
-    (conj [] ["ali" "veli"])
-    [])
-  ;=> [["name" "ali"]]
-
-  (str/lower-case ["ali" "veli"])
-  ;=> "[\"ali\" \"veli\"]"
-
-  )
-
-
-
-
-(filter-vector-func2 my-vec "a")
-;[["name" "ali"] ["name" "batu"] ["surname" "veli"] ["surname" "can"]]
-
-(filter-vector-func2 my-vec "v")
-;=> [["surname" "veli"]]
-
-
-
-(let [[first second :as all] my-vec]
-  all)
 
 ;-------------------------------------------d01------------------------------------------------
 ;a02===> e01 e göre extra bir filter fonksşyonu ve threading makroları kullandım.
@@ -229,40 +116,3 @@
   ;(["name" "ali"] ["surname" "veli"] ["name" "batu"] ["surname" "can"])
 
   )
-
-
-
-
-
-
-
-
-
-
-
-
-
-(defn filter-vector-func-by-postwalk [coll search-str]
-  (->> coll
-       (clojure.walk/postwalk
-         (fn [form]
-           (let [form (if (vector? form)
-                        (vec (keep identity form))
-                        form)]
-             (cond
-               (and (vector? form)
-                    (every? vector? form)) form
-               (and (vector? form)
-                    (not (every? string? form))) nil
-               (and (vector? form)
-                    (every? string? form)
-                    (->> form
-                         (some (fn [str-vec]
-                                 (-> str-vec
-                                     clojure.string/lower-case
-                                     (clojure.string/includes? search-str)))))) form
-               :else form))))
-       (keep identity)
-       vec))
-
-(filter-vector-func-by-postwalk my-vec "a")
