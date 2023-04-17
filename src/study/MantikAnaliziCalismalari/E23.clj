@@ -1,16 +1,19 @@
-(ns study.MantikAnaliziCalismalari.E23)
+(ns study.MantikAnaliziCalismalari.E23
+  (:require [clojure.string :as str]))
+;date: 20230417
+;rfr: src/study/VeriAnalizProblemleri/D10.clj -> a01
 
-
-
-(def my-map {1 {:id 1 :name "ali" :surname "veli"}
+(def m {1      {:id 1 :name "ali" :surname "veli"}
              2 {:id 2 :name "batu" :surname "can"}
              })
 
-(def my-vec (into [] (for [m (vals my-map) [k v] m] [(name k) v])))
+(def v (into [] (for [m (vals m) [k v] m] [(name k) v])))
 ;=> [["id" 1] ["name" "ali"] ["surname" "veli"] ["id" 2] ["name" "batu"] ["surname" "can"]]
 
 ;-------------------------------------------d01------------------------------------------------
 ;a01 ==> burada standart reduce fonksiyonu ile yaptık.
+
+
 (defn filter-vector-func2 [coll ?s]
   (reduce
     (fn [x y]
@@ -32,8 +35,6 @@
 
 
   (def y ["name" "ali"])
-
-  (f [] y)
 
   ((fn [x y]
      (let [[:as all] y]

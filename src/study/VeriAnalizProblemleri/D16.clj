@@ -1,5 +1,9 @@
 (ns study.VeriAnalizProblemleri.D16
   (:require [clojure.string :as str]))
+;Debugging ref ->
+;rfr: src/study/MantikAnaliziCalismalari/E30.clj
+
+
 
 ;## d16
 ;

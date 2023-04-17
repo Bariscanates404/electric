@@ -1,4 +1,6 @@
 (ns study.VeriAnalizProblemleri.D15)
+;Debugging ref ->
+;rfr: src/study/MantikAnaliziCalismalari/E29.clj
 
 
 ;## d15
@@ -47,6 +49,5 @@
     (for [len (range 1 (+ 1 (count coll)))]
       (get-in my-map [len])
       )))
-
 (d15 my-map)
 ;=> [[1 "Istanbul" "ali" "veli"] [2 "Ankara" "batu" "can"]]

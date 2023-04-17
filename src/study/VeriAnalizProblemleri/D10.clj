@@ -2,6 +2,10 @@
   (:require
     [clojure.string :as str]
     [study.reusable-functions :as rf]))
+;Debugging ref ->
+;rfr: src/study/MantikAnaliziCalismalari/E23.clj -> a01
+;rfr: src/study/MantikAnaliziCalismalari/E24.clj -> a02
+
 
 ;Girdi:
 ;

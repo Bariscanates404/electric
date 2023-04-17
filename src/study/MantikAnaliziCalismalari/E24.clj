@@ -1,14 +1,15 @@
 (ns study.MantikAnaliziCalismalari.E24)
+;date: 20230417
+;rfr: src/study/VeriAnalizProblemleri/D10.clj -> a02
 
 
-
-(def my-map {1 {:id 1 :name "ali" :surname "veli"}
+(def m {1      {:id 1 :name "ali" :surname "veli"}
              2 {:id 2 :name "batu" :surname "can"}
              })
 
-(def my-vec (into [] (for [m (vals my-map) [k v] m] [(name k) v])))
+(def v (into [] (for [m (vals m) [k v] m] [(name k) v])))
 ;=> [["id" 1] ["name" "ali"] ["surname" "veli"] ["id" 2] ["name" "batu"] ["surname" "can"]]
-
+;20230414 Barış Can Ateş
 ;-------------------------------------------d01------------------------------------------------
 ;a02===> e01 e göre extra bir filter fonksşyonu ve threading makroları kullandım.
 (defn filter-vector-func [coll search-str]
@@ -22,9 +23,10 @@
        )
   )
 
-(filter-vector-func my-vec "a")
+(filter-vector-func v "a")
+;=> (["name" "ali"] ["surname" "veli"] ["name" "batu"] ["surname" "can"])
 
-;20230414
+
 ;1. adım olarak thread last ve threading makrolarımı standart kullanıma dönüştürdüm.
 (defn filter-vector-func-a02 [coll search-str]
   (filter
@@ -34,12 +36,12 @@
     coll))
 
 ;çalıştığını kontrol ediyoruz.
-(filter-vector-func-a02 my-vec "a")
+(filter-vector-func-a02 v "a")
 ;=> (["name" "ali"] ["surname" "veli"] ["name" "batu"] ["surname" "can"])
 
 
 (comment
-  (def coll my-vec)
+  (def coll v)
   (def search-str "a")
   ;şimdi debuggingimize başlayabiliriz.en dış formda filter fonksiyonumuz var. bu fonksiyonu "pred coll" imzası ile kullanıyoruz.
 
@@ -65,7 +67,7 @@
   ;=> (["name" "ali"] ["surname" "veli"] ["name" "batu"] ["surname" "can"])
 
   (def search-str "a")
-  (def coll my-vec)
+  (def coll v)
   (identity coll)
   ;=> [["id" 1] ["name" "ali"] ["surname" "veli"] ["id" 2] ["name" "batu"] ["surname" "can"]]
 
@@ -82,7 +84,7 @@
   ;=> true
 
   (def search-str "a")
-  (def coll my-vec)
+  (def coll v)
   ;şimdi str-vec collection dan buraya gelen vector çiftleriydi. bu iterasyonu filter fonksiyonu yapıyor bu nedenle burada iterasyonları el ile manuel yolarak yapcağım.
   ;1. iterasyon ==>
   (def str-vec ["id" 1])

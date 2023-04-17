@@ -1,4 +1,6 @@
 (ns study.VeriAnalizProblemleri.D14)
+;Debugging ref ->
+;rfr: src/study/MantikAnaliziCalismalari/E28.clj
 
 ;Girdi:
 ;
