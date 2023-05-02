@@ -55,7 +55,6 @@
 (d11 my-vec)
 ;=> [["ali" "veli"] ["batu" "can"]]
 
-
 ;-------------------------------------------DEBUGGING------------------------------------------------
 (def outer-coll [{:id   1
                   :name {:first "ali" :last "veli"}}

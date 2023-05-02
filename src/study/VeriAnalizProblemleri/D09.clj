@@ -1,5 +1,6 @@
 (ns study.VeriAnalizProblemleri.D09
   (:require
+    [clojure.walk :as walk]
     [study.reusable-functions :as rf]
     [clojure.string :as str]
     ))
@@ -56,9 +57,9 @@
 ;-------------------------------------------d02------------------------------------------------
 
 (defn transform-maps-to-vector [map]
-  (postwalk (fn [x]
+  (walk/postwalk (fn [x]
               (if (map? x) (into [] cat x) x))
-            map)
+                 map)
   )
 
 

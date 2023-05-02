@@ -39,6 +39,24 @@
 ;=> [["ali" "veli"] ["batu" "can"]]
 
 
+;-------------------------------------------vals ile çözüm------------------------------------------------
+
+
+
+(defn d11vals [coll]
+  (reduce
+    (fn [x y]
+      (let [{id :id {first :first, last :last} :name} y]
+        (conj x (vector id first last))
+        ))
+    []
+    (vals coll)))
+
+
+(d11vals my-map)
+;=> [["ali" "veli"] ["batu" "can"]]
+
+
 ;-------------------------------------------DEBUGGING------------------------------------------------
 ;reduce f init coll imzası ile kullanılmış.
 (def outer-coll {1 {:id   1

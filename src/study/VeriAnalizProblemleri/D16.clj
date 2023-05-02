@@ -56,3 +56,18 @@
 
 (d16 my-map "ankara")
 ;=> [{:id 2, :city "Ankara", :name {:first "batu", :last "can"}}]
+
+;-------------------------------------------vals ile çözüm------------------------------------------------
+
+
+(defn d16 [coll ?s]
+  (reduce
+    (fn [x y]
+      (let [{:keys [id city _]} y]
+        (if (clojure.string/includes? (clojure.string/lower-case city) (clojure.string/lower-case ?s))
+          (conj x (coll id) )
+          x)))
+    []
+    (vals coll)))
+
+(d16 my-map "Ankara")

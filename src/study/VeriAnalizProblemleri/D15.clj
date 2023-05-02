@@ -51,3 +51,20 @@
       )))
 (d15 my-map)
 ;=> [[1 "Istanbul" "ali" "veli"] [2 "Ankara" "batu" "can"]]
+
+
+
+;-------------------------------------------vals ile çözüm------------------------------------------------
+
+
+(defn d15vals [coll]
+  (reduce
+    (fn [x y]
+      (let [{:keys [id city name]} y  ;1. seviye map - içerisinde bulunan bütün öğelerin pairlerini döner
+            {:keys [first last]} name] ;2. seviye map - name keyi içerisinde bulunan pairleri döner
+        (conj x (vector id city first last))
+        ))
+    []
+    (vals coll)))
+(d15vals my-map)
+;=> [[1 "Istanbul" "ali" "veli"] [2 "Ankara" "batu" "can"]]
